@@ -1,0 +1,15 @@
+
+build:
+  version: "2.0"
+  
+  
+
+accounts:
+  message: "Welcome to Bank accounts related QaTesting APIs "
+  contactDetails:
+    name: "ganesh - Qa Lead"
+    email: "ganesh@gmail.com"
+  onCallSupport:
+    - (555) 444-1234
+    - (555) 333-1345
+    

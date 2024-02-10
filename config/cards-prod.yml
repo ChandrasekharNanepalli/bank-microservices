@@ -1,0 +1,15 @@
+
+      
+build:
+  version: "1.0"
+  
+  
+
+accounts:
+  message: "Welcome to Bank cards related Production APIs "
+  contactDetails:
+    name: "harish - Prod Lead"
+    email: "prod@gmail.com"
+  onCallSupport:
+    - (555) 326-1234
+    - (555) 363-1345
