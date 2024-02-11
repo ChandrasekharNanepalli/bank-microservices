@@ -1,0 +1,61 @@
+services:
+  configserver:
+    image: "chandunanepali/configserver:v1"
+    container_name: configserver
+    ports: 
+      - "9000:9000"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - chanduMS
+  accounts:
+    image: "chandunanepalli/accounts:v1"
+    container_name: accounts-ms
+    ports:
+      - "9090:9090"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - chanduMS
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:9000/"
+      SPRING_PROFILES_ACTIVE: default
+  cards:
+    image: "chandunanepalli/cards/v1"
+    container_name: cards-ms
+    ports:
+      - "9091:9091"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - chanduMs
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:9000/"
+      SPRING_PROFILE_ACTIVE: default      
+  loans:
+    image: "chandunanepalli/loans/v1"
+    container_name: loans
+    ports:
+      - "9092:9092"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - chanduMs
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:9000/"
+      SPRING_PROFILE_ACTIVE: default
+      
+networks:
+  chanduMS:
+    driver: "bridge"
