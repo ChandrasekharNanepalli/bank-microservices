@@ -1,0 +1,12 @@
+    
+build:
+  version: "3.0"
+  
+loans:
+  message: "Welcome to Bank loans related local APIs "
+  contactDetails:
+    name: "chank - Developer"
+    email: "chank@gmail.com"
+  onCallSupport:
+    - (545) 595-7634
+    - (535) 543-9345

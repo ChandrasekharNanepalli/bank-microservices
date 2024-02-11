@@ -1,0 +1,14 @@
+
+
+build:
+  version: "3.0"
+  
+  
+cards:
+  message: "Welcome to Bank cards related local APIs "
+  contactDetails:
+    name: "monk - Developer"
+    email: "monk@gmail.com"
+  onCallSupport:
+    - (555) 595-1634
+    - (555) 543-1345

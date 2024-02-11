@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.chandu'
 version = '0.0.1-SNAPSHOT'
-jib.to.image='chandunanepalli/${project.name}:v1'
+jib.to.image='chandunanepalli/accounts:v1'
 java {
 	sourceCompatibility = '17'
 }
@@ -44,7 +44,7 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
     implementation 'com.h2database:h2'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
-   
+   implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 }
 
 

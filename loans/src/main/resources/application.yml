@@ -20,7 +20,12 @@ spring:
       ddl-auto: update
     show-sql: true
   profiles:
-    active: "prod"
+    active: "qa"
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"  
 
 
 management:
