@@ -1,60 +1,75 @@
 services:
+  rabbit:
+    image: rabbitmq:3.12-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    extends:
+      file: common-config.yml
+      service: network-deploy-service   
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    
+   
+
   configserver:
-    image: "chandunanepali/configserver:v1"
+    image: "chandunanepalli/configserver:v1"
     container_name: configserver
     ports: 
       - "9000:9000"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - chanduMS
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      retries: 10
+      timeout: 5s
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+       
   accounts:
     image: "chandunanepalli/accounts:v1"
     container_name: accounts-ms
     ports:
       - "9090:9090"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - chanduMS
+    depends_on:
+      configserver:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
-      SPRING_CONFIG_IMPORT: "configserver:http://configserver:9000/"
-      SPRING_PROFILES_ACTIVE: default
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+      
   cards:
-    image: "chandunanepalli/cards/v1"
+    image: "chandunanepalli/cards:v1"
     container_name: cards-ms
     ports:
       - "9091:9091"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - chanduMs
     environment:
       SPRING_APPLICATION_NAME: "cards"
-      SPRING_CONFIG_IMPORT: "configserver:http://configserver:9000/"
-      SPRING_PROFILE_ACTIVE: default      
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+           
   loans:
-    image: "chandunanepalli/loans/v1"
+    image: "chandunanepalli/loans:v1"
     container_name: loans
     ports:
       - "9092:9092"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - chanduMs
     environment:
       SPRING_APPLICATION_NAME: "loans"
-      SPRING_CONFIG_IMPORT: "configserver:http://configserver:9000/"
-      SPRING_PROFILE_ACTIVE: default
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
       
 networks:
   chanduMS:
