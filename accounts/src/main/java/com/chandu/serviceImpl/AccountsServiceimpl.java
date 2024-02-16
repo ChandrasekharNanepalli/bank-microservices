@@ -53,7 +53,7 @@ public class AccountsServiceimpl implements IAccountsService {
 		Accounts newAcoount=new Accounts();
 		newAcoount.setCustomerId(customer.getCustomerId());
 		long randomAccNumber=1000000000L+new Random().nextInt(900000000);
-		newAcoount.setAccountsNumber(randomAccNumber);
+		newAcoount.setAccountNumber(randomAccNumber);
 		newAcoount.setAccountType(AccountsConstants.SAVINGS);
 		newAcoount.setBranchAddress(AccountsConstants.ADDRESS);
 //		newAcoount.setCreatedAt(LocalDateTime.now());

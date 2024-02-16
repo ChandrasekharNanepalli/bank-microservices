@@ -18,14 +18,23 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    show-sql: true
-  profiles:
-    active: "qa"
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"  
+    
+    
+#    url: jdbc:mysql://localhost:3308/loansdb
+#    username: root
+#    password: root
+#  jpa:
+#    show-sql: true
+#  sql:
+#    init:
+#      mode: always
+#  profiles:
+#    active: "qa"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"  
 
 
 management:

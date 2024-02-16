@@ -1,5 +1,7 @@
 package com.loan.controller;
 
+import org.hibernate.validator.internal.util.logging.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -49,6 +51,8 @@ public class LoansController {
 	
 	@Autowired
 	private Environment environment;
+	
+	static Logger logger=org.slf4j.LoggerFactory.getLogger(LoansController.class);
 	
 	@Value("${build.version}")
 	private String buildVersion;
@@ -236,6 +240,7 @@ public class LoansController {
 					)})
 	@GetMapping("/contact-info")
 	public ResponseEntity<LoansContactInfoDto> getContactInfo(){
+		logger.info("entere : ",loansContactInfoDto);
 		return ResponseEntity.status(HttpStatus.OK).body(loansContactInfoDto);
 	}
 

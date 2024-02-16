@@ -3,13 +3,14 @@ plugins {
 	id 'org.springframework.boot' version '3.2.2'
 	id 'io.spring.dependency-management' version '1.1.4'
 	//id 'com.palantir.docker' version '0.24.0'
+	id 'com.google.cloud.tools.jib' version '3.4.0'
 }
 
 
 
 group = 'com.cards'
 version = '0.0.1-SNAPSHOT'
-
+jib.to.image='chandunanepalli/cards:v1'
 
 
 java {
@@ -32,11 +33,11 @@ dependencyManagement {
     mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
   }
 }
-bootBuildImage {
-builder = "docker.io/paketobuildpacks/builder-jammy-base"
-imageName = "chandunanepalli/${project.name}:v1"
-environment["BP_JVM_VERSION"] = "17"
-}
+//bootBuildImage {
+//builder = "docker.io/paketobuildpacks/builder-jammy-base"
+//imageName = "chandunanepalli/${project.name}:v1"
+//environment["BP_JVM_VERSION"] = "17"
+//}
 
 repositories {
 	mavenCentral()
@@ -56,7 +57,10 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
     implementation 'com.h2database:h2'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
-     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+    // implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+		//implementation 'mysql:mysql-connector-java:5.1.6'
+    implementation 'com.mysql:mysql-connector-j'
 }
 
 tasks.named('test') {
