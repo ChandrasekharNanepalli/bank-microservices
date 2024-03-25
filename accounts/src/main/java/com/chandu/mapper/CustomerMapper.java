@@ -1,5 +1,6 @@
 package com.chandu.mapper;
 
+import com.chandu.dto.CustomerDetailsVo;
 import com.chandu.dto.CustomerVo;
 import com.chandu.model.Customer;
 
@@ -17,6 +18,13 @@ public class CustomerMapper {
 		customerVo.setMobileNumber(customer.getMobileNumber());
 		customerVo.setName(customer.getName());
 		return customerVo;
+	}
+	
+	public static  CustomerDetailsVo mapToCustomerDetailDto(Customer customer,CustomerDetailsVo customerDetailsVo) {
+		customerDetailsVo.setEmail(customer.getEmail());
+		customerDetailsVo.setMobileNumber(customer.getMobileNumber());
+		customerDetailsVo.setName(customer.getName());
+		return customerDetailsVo;
 	}
 
 }

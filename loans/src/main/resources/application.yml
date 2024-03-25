@@ -36,10 +36,33 @@ spring:
 #    username: "guest"
 #    password: "guest"  
 
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
       
+endpoints:
+    shutdown:
+      enable: true
+      
+info:
+  app:
+    name: "loans"
+    description: "Chandu bank Loan Application"
+    version: "1.0.0"

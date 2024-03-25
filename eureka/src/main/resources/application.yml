@@ -8,7 +8,7 @@ management:
   endpoints:
     web:
       exposure:
-        endpoints: "*"
+        include: "*"
   health:
     readiness-state:
       enabled: true

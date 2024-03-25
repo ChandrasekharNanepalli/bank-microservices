@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: "cards"
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -16,6 +18,22 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
+    show-sql: true
+  config:
+    import: "optional:configserver:http://localhost:9000/"
+    
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
 #    url: jdbc:mysql://localhost:3307/cardssdb
 #    username: root
 #    password: root
@@ -34,10 +52,23 @@ spring:
 #    username: "guest"
 #    password: "guest"  
 
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+info:
+  app:
+    name: "Cards"
+    description: "Chandu Bank Cards Application"
+    version: "1.0.0"
     
     
-management:
-  endpoint:
-    web:
-      exposure:
-        include: "*"
+
+      
+endpoints:
+  shutdown:
+    enabled: true
