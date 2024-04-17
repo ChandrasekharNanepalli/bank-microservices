@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: "gatewayserver"
+  config:
+    import: "optional:configserver:http://localhost:9000/"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+  
+
+    
+      
+info:
+  app:
+    info: "gatewayserver"
+    description: "Chandu Bank gateway Application"
+    version: "1.0.0"    
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: false
+  info:
+    env:
+      enabled: true
+
